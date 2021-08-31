@@ -36,13 +36,16 @@ class BotController extends Controller
 
     public function webhook(Request $request)
     {
-        Telegram::sendMessage([
-            'chat_id' => '1221318726',
-            'text' => 'Hello world!',
-        ]);
+        $update = Telegram::commandsHandler(true);
+
+        // Telegram::sendMessage([
+        //     'chat_id' => '1221318726',
+        //     'text' => 'Hello world!',
+        // ]);
         return response()->json([
             "success" => true,
             "message" => "success",
+            "data" => $update,
         ], 200);
     }
 }

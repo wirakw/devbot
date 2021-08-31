@@ -34,11 +34,11 @@ return [
     'bots'                         => [
         'mybot' => [
             'username'            => 'wirakw_bot',
-            'token'               => env('TELEGRAM_BOT_TOKEN', '1785958129:AAELfvq44owJs4yUnOACw-2czPoqMc3MTKg'),
+            'token'               => env('TELEGRAM_BOT_TOKEN', '123456789:ABC_a0bcDefGhijklmno_0pqrSt-uvWXYZA'),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
             'commands'            => [
-                //Acme\Project\Commands\MyTelegramBot\BotCommand::class
+                App\Telegram\Commands\HelpCommand::class,
             ],
         ],
 
