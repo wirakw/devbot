@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Queue;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Telegram;
 
 class BotController extends Controller
@@ -28,13 +29,17 @@ class BotController extends Controller
     {
         Telegram::sendMessage([
             'chat_id' => '1221318726',
-            'text' => 'Hello world!'
+            'text' => 'Hello world!',
         ]);
         return;
     }
 
-    public function webhook()
+    public function webhook(Request $request)
     {
+        Telegram::sendMessage([
+            'chat_id' => '1221318726',
+            'text' => 'Hello world!',
+        ]);
         return response()->json([
             "success" => true,
             "message" => "success",
