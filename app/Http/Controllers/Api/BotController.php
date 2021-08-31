@@ -33,4 +33,11 @@ class BotController extends Controller
         return;
     }
 
+    public function webhook()
+    {
+        return response()->json([
+            "success" => true,
+            "message" => "success",
+        ], 200);
+    }
 }

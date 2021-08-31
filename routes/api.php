@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/bot/getupdates', 'Api\BotController@getUpdate');
 Route::post('/bot/sendmessage', 'Api\BotController@sendMessage');
+Route::post('/webhook', 'Api\BotController@webhook');
