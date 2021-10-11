@@ -2,41 +2,41 @@
 
 namespace App\Telegram\Commands;
 
-use Throwable;
 use Telegram;
 use Telegram\Bot\Commands\Command;
 
 /**
- * Class StartCommand.
+ * Class HelpCommand.
  */
 class StartCommand extends Command
 {
-    protected string $description = 'Start command to process initial request!';
+    /**
+     * @var string Command Name
+     */
+    protected $name = 'start';
 
     /**
-     * Execute the bot command.
+     * @var array Command Aliases
+     */
+    protected $aliases = ['listcommands'];
+
+    /**
+     * @var string Command Description
+     */
+    protected $description = 'Help command, Get a list of all commands';
+
+    /**
+     * {@inheritdoc}
      */
     public function handle()
     {
-        $message = $this->getUpdate()->getMessage();
-        $firstName = $message->from->first_name;
+        $this->getUpdate();
 
-        $text = "Hello, $firstName! Welcome to our bot!\nType /help to get a list of available commands.";
+        $text = 'Hey stranger, thanks for visiting me.' . chr(10) . chr(10);
+        $text .= 'I am a bot and working for' . chr(10);
+        $text .= env('APP_URL') . chr(10) . chr(10);
+        $text .= 'Please come and visit me there.' . chr(10);
 
-        $this->bot->sendMessage([
-            'chat_id' => $message->chat->id,
-            'text'    => $text,
-        ]);
-    }
-
-   /**
-    * Triggered on failure.
-    *
-    * @param array     $arguments
-    * @param Throwable $exception
-    */
-    public function failed(array $arguments, Throwable $exception)
-    {
-        //
+        $this->replyWithMessage(compact('text'));
     }
 }

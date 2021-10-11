@@ -37,11 +37,15 @@ class BotController extends Controller
     public function webhook(Request $request)
     {
         $update = Telegram::commandsHandler(true);
-
-        // Telegram::sendMessage([
-        //     'chat_id' => '1221318726',
-        //     'text' => 'Hello world!',
-        // ]);
+        $isCommand = substr($update['message']['text'],0,1);
+        if ($isCommand != "/") {
+            Telegram::sendMessage([
+                                'chat_id' => $update['message']['chat']['id'], 
+                                'text' => "Sorry, command <b>" . $update['message']['text'] . "</b> wasn't found :/",
+                                'parse_mode' => 'HTML',
+                            ]);
+        }
+        
         return response()->json([
             "success" => true,
             "message" => "success",
