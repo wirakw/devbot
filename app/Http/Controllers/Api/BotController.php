@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use Telegram;
 
 class BotController extends Controller
@@ -36,20 +36,21 @@ class BotController extends Controller
 
     public function webhook(Request $request)
     {
-        $update = Telegram::commandsHandler(true);
-        $isCommand = substr($update['message']['text'],0,1);
+        $pesan = Telegram::commandsHandler(true);
+        $isCommand = substr($pesan['message']['text'],0,1);
         if ($isCommand != "/") {
+            $Str1 = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $pesan['message']['text']); //normalisasi
             Telegram::sendMessage([
-                                'chat_id' => $update['message']['chat']['id'], 
-                                'text' => "Sorry, command <b>" . $update['message']['text'] . "</b> wasn't found :/",
-                                'parse_mode' => 'HTML',
-                            ]);
+                        'chat_id' => $pesan['message']['chat']['id'],
+                        'text' => "Sorry, command <b>" . $pesan['message']['text'] . "</b> wasn't found :/",
+                        'parse_mode' => 'HTML',
+                    ]);
         }
-        
+
         return response()->json([
             "success" => true,
             "message" => "success",
-            "data" => $update,
+            // "data" => $update,
         ], 200);
     }
 }
