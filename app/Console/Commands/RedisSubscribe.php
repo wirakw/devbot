@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Redis;
-use Telegram;
+use Illuminate\Support\Facades\Redis;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class RedisSubscribe extends Command
 {

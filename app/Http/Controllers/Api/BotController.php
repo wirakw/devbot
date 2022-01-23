@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Telegram;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class BotController extends Controller
 {
