@@ -19,7 +19,7 @@ class TelegramAssistance extends Notification
             // Optional recipient user id.
             ->to('1221318726')
             // Markdown supported.
-            ->content("*Hello Wira*")
+            ->content("*Hello Wira*");
             // ->content($data['msg'] . "from excel name : " . $data['file'])
             // (Optional) Blade template for the content.
             // ->view('notification', ['url' => $url])
