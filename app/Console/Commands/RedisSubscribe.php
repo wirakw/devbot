@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\Api\BotController;
+use Telegram;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
-use Telegram;
+use App\Http\Controllers\Api\BotController;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\TelegramAssistance;
 
 class RedisSubscribe extends Command
 {
@@ -40,9 +42,10 @@ class RedisSubscribe extends Command
      */
     public function handle()
     {
-        Redis::subscribe(['telegram'], function ($message) {
-            $controller = new BotController();
-            $controller->sendMessage($message);
+        Redis::subscribe(['telegram'], function ($payload) {
+            Notification::send('1221318726', new TelegramAssistance($payload));
+            // $controller = new BotController();
+            // $controller->sendMessage($payload);
         });
 
         // $client = Redis::connection()->client();
