@@ -46,6 +46,7 @@ class RedisSubscribe extends Command
             Notification::send('1221318726', new TelegramAssistance($payload));
             // $controller = new BotController();
             // $controller->sendMessage($payload);
+            echo $payload;
         });
 
         // $client = Redis::connection()->client();

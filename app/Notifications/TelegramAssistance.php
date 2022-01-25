@@ -13,20 +13,20 @@ class TelegramAssistance extends Notification
 
     public function toTelegram($payload)
     {
-        $data = json_decode($payload, true);
+        // $data = json_decode($payload, true);
 
         return TelegramMessage::create()
             // Optional recipient user id.
             ->to('1221318726')
             // Markdown supported.
             ->content("*Hello Wira*")
-            ->content($data['msg'] . "from excel name : " . $data['file'])
+            // ->content($data['msg'] . "from excel name : " . $data['file'])
             // (Optional) Blade template for the content.
             // ->view('notification', ['url' => $url])
 
             // (Optional) Inline Buttons
-            ->button('View Invoice', $data['url'])
-            ->button('Download Pdf', $data['url']);
+            // ->button('View Invoice', $data['url'])
+            // ->button('Download Pdf', $data['url']);
             // (Optional) Inline Button with callback. You can handle callback in your bot instance
             // ->buttonWithCallback('Confirm', 'confirm_invoice ' . $this->invoice->id);
     }
