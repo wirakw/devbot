@@ -3,6 +3,7 @@
 namespace App\Notifications;
 use NotificationChannels\Telegram\TelegramMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class TelegramAssistance extends Notification
 {
@@ -14,7 +15,7 @@ class TelegramAssistance extends Notification
     public function toTelegram($payload)
     {
         // $data = json_decode($payload, true);
-
+        log::info($payload);
         return TelegramMessage::create()
             // Optional recipient user id.
             ->to('1221318726')
