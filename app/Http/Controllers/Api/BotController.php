@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Notifications\FromOtherService;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Illuminate\Support\Facades\Notification;
 
 class BotController extends Controller
 {
@@ -27,10 +29,12 @@ class BotController extends Controller
 
     public function sendMessage()
     {
-        Telegram::sendMessage([
-            'chat_id' => '1221318726',
-            'text' => 'Hello world!',
-        ]);
+        Notification::send('1221318726', new FromOtherService());
+
+        // Telegram::sendMessage([
+        //     'chat_id' => '1221318726',
+        //     'text' => 'Hello world!',
+        // ]);
         return;
     }
 
