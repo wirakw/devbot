@@ -4,26 +4,25 @@ namespace App\Console\Commands;
 
 use Telegram;
 use Illuminate\Console\Command;
+use App\Notifications\ErrorNotif;
 use Illuminate\Support\Facades\Redis;
-use App\Http\Controllers\Api\BotController;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\TelegramAssistance;
 
-class RedisSubscribe extends Command
+class RedisCheckConnection extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'redis:subscribe';
+    protected $signature = 'redis:testping';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'subscribe redis on several chanel';
+    protected $description = 'testping redis on several chanel';
 
     /**
      * Create a new command instance.
@@ -42,11 +41,14 @@ class RedisSubscribe extends Command
      */
     public function handle()
     {
-        Redis::subscribe(['telegram'], function ($payload) {
-            Notification::send('1221318726', new TelegramAssistance($payload));
-            // $controller = new BotController();
-            // $controller->sendMessage($payload);
-            echo $payload;
-        });
+        $client = Redis::connection()->client();
+        if($client->isConnected()){
+            $this->info('Connected');
+        } else {
+            $this->error('Fail to Connect');
+            Notification::send('1221318726', new ErrorNotif('Fail to Connect to redis'));
+        }
+
+        return 0;
     }
 }
